@@ -3,21 +3,21 @@ services:
   spotify:
     image: satishjagana/spotifyv1:latest
     ports:
-      - "90:80"
+      - "93:80"
     deploy:
       replicas: 3
 
   zomato:
     image: satishjagana/zomatov1:latest
     ports:
-      - "91:80"
+      - "94:80"
     deploy:
       replicas: 3
 
   swiggy:
     image: satishjagana/swiggyv1:latest
     ports:
-      - "92:80"
+      - "95:80"
     deploy:
       replicas: 3
 
