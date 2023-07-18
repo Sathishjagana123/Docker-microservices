@@ -1,43 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Zomoto - Food Delivery</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section class="hero">
+      <h1>Welcome to Zomoto</h1>
+      <p>Order delicious food online</p>
+      <a href="#" class="btn">Order Now</a>
+    </section>
+    
+    <section class="featured">
+      <h2>Featured Dishes</h2>
+      <div class="dish">
+        <img src="dish1.jpg" alt="Dish 1">
+        <h3>Dish 1</h3>
+        <p>Description of Dish 1</p>
+        <a href="#" class="btn order-btn">Order</a>
+      </div>
+      
+      <div class="dish">
+        <img src="dish2.jpg" alt="Dish 2">
+        <h3>Dish 2</h3>
+        <p>Description of Dish 2</p>
+        <a href="#" class="btn order-btn">Order</a>
+      </div>
+    </section>
+    
+    <section class="categories">
+      <h2>Categories</h2>
+      <ul>
+        <li><a href="#">Category 1</a></li>
+        <li><a href="#">Category 2</a></li>
+        <li><a href="#">Category 3</a></li>
+        <li><a href="#">Category 4</a></li>
+      </ul>
+    </section>
+    
+    <section class="cart hidden">
+      <h2>Your Cart</h2>
+      <ul id="cart-items"></ul>
+      <p>Total: <span id="cart-total">0</span></p>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2023 Zomoto. All rights reserved.</p>
+  </footer>
+  
+  <script>
+    // Add event listeners to order buttons
+    const orderButtons = document.querySelectorAll('.order-btn');
+    orderButtons.forEach(button => {
+      button.addEventListener('click', addToCart);
+    });
+    
+    // Add dish to cart
+    function addToCart(event) {
+      event.preventDefault();
+      
+      const dish = event.target.parentElement;
+      const dishName = dish.querySelector('h3').textContent;
+      const dishPrice = 10; // Replace with the actual price
+      
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      
+      const newItem = document.createElement('li');
+      newItem.textContent = dishName;
+      cartItems.appendChild(newItem);
+      
+      const currentTotal = parseFloat(cartTotal.textContent);
+      cartTotal.textContent = (currentTotal + dishPrice).toFixed(2);
+      
+      showCart();
+    }
+    
+    // Show the cart section
+    function showCart() {
+      const cartSection = document.querySelector('.cart');
+      cartSection.classList.remove('hidden');
+    }
+  </script>
+</body>
 </html>
